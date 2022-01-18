@@ -1,8 +1,5 @@
 package ru.gb.springbootdemoapp.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -18,18 +15,22 @@ import ru.gb.springbootdemoapp.dto.ProductShortDto;
 import ru.gb.springbootdemoapp.service.CategoryService;
 import ru.gb.springbootdemoapp.service.ProductService;
 
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+  private final ProductMapper productMapper;
   private final ProductService productService;
   private final CategoryService categoryService;
-  private final ProductMapper productMapper;
 
-  public AdminController(ProductService productService, CategoryService categoryService, ProductMapper productMapper) {
+  public AdminController(ProductMapper productMapper, ProductService productService, CategoryService categoryService) {
+    this.productMapper = productMapper;
     this.productService = productService;
     this.categoryService = categoryService;
-    this.productMapper = productMapper;
   }
 
   @GetMapping

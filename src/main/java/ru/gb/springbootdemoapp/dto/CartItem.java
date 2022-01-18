@@ -1,5 +1,6 @@
 package ru.gb.springbootdemoapp.dto;
 
+
 import lombok.Data;
 
 @Data

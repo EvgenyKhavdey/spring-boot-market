@@ -1,11 +1,15 @@
 package ru.gb.springbootdemoapp.service;
 
-import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import ru.gb.springbootdemoapp.converter.ProductMapper;
 import ru.gb.springbootdemoapp.dto.Cart;
 
+import javax.annotation.PostConstruct;
+
 @Service
+@SessionScope
 public class CartService {
 
   private ProductService productService;

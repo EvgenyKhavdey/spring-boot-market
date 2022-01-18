@@ -1,7 +1,6 @@
 package ru.gb.springbootdemoapp.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.gb.springbootdemoapp.converter.ProductMapper;
 import ru.gb.springbootdemoapp.dto.ProductDto;
 import ru.gb.springbootdemoapp.service.ProductService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {

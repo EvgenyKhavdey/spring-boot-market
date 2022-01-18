@@ -1,10 +1,12 @@
 package ru.gb.springbootdemoapp.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import ru.gb.springbootdemoapp.model.Category;
 import ru.gb.springbootdemoapp.repository.CategoryRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {

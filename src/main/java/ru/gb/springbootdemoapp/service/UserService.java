@@ -1,6 +1,6 @@
 package ru.gb.springbootdemoapp.service;
 
-import java.util.stream.Collectors;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.springbootdemoapp.repository.UserRepository;
+
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
