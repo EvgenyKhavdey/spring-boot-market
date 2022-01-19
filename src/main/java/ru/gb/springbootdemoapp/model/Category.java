@@ -12,11 +12,21 @@ import java.util.List;
 public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column
+  @Column(name = "id")
   private Long id;
 
-  @Column
+  @Column(name = "title")
   private String title;
+
+  @Column(name = "description")
+  private String description;
+
+  @Column(name = "image_url")
+  private String imageUrl;
+
+  @OneToMany
+  @JoinColumn(name = "id")
+  private List<Category> parentId;
 
   @OneToMany(mappedBy = "category")
   private List<Product> products;

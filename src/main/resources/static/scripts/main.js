@@ -20,6 +20,12 @@ function getAndRenderCart() {
         .then(body => renderCart(body));
 }
 
+function onClickCreateOrder(button) {
+    fetch(window.location.origin + "/cart/order")
+        .then(response => response.json())
+        .finally(() => button.disabled = false)
+}
+
 function displayCart() {
     document.getElementById("shoppingCart").classList.toggle('d-none');
 }
@@ -48,6 +54,6 @@ function renderCart(cart) {
     });
     cartInnerHtml += `
     </ul>
-    <a href="#" class="btn btn-success w-100">Оформить заказ</a>`;
+    <a href="#" class="btn btn-success w-100" data-cart=\"${cart}\"  onclick="onClickCreateOrder(this)">Оформить заказ</a>`;
     document.getElementById("shoppingCart").innerHTML = cartInnerHtml;
 }

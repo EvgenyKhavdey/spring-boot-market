@@ -12,11 +12,13 @@ import javax.annotation.PostConstruct;
 @SessionScope
 public class CartService {
 
+  private OrderService orderService;
   private ProductService productService;
   private ProductMapper productMapper;
   private Cart cart;
 
-  public CartService(ProductService productService, ProductMapper productMapper) {
+  public CartService(OrderService orderService, ProductService productService, ProductMapper productMapper) {
+    this.orderService = orderService;
     this.productService = productService;
     this.productMapper = productMapper;
   }
@@ -38,5 +40,10 @@ public class CartService {
   public Cart removeProductById(Long id) {
     cart.removeItem(id);
     return cart;
+  }
+
+  public void createOrder(){
+    int i = 0;
+    orderService.createOrder(cart);
   }
 }

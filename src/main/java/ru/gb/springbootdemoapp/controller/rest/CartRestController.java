@@ -29,4 +29,10 @@ public class CartRestController {
   public Cart deleteProduct(@PathVariable Long id) {
     return cartService.removeProductById(id);
   }
+
+  @GetMapping("/order")
+  public void createOrder(){
+    int i = 0;
+    cartService.createOrder();
+  }
 }

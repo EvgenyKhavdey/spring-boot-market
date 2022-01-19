@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS attributes (
 CREATE TABLE IF NOT EXISTS attributes_values (
     id                    BIGSERIAL PRIMARY KEY,
     title                 VARCHAR(255) NOT NULL,
-    attributes_id         BIGINT REFERENCES attributes_values (id)
+    attributes_id         BIGINT REFERENCES attributes (id)
 
 );
 
@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS product_attributes (
 
 CREATE TABLE IF NOT EXISTS  orders(
     id                    BIGSERIAL PRIMARY KEY,
-    customer_id           BIGINT REFERENCES users (id),
-    price                 FLOAT NOT NULL,
+    price                 FLOAT,
     order_status          SMALLINT,
     shipping_method       SMALLINT,
     address               TEXT,
@@ -52,7 +51,7 @@ CREATE TABLE IF NOT EXISTS  order_items (
     id                    BIGSERIAL PRIMARY KEY,
     order_id              BIGINT REFERENCES orders (id),
     product_id            BIGINT REFERENCES products (id),
-    price                 FLOAT NOT NULL,
+    price                 DECIMAL,
     quantity              INTEGER
 );
 
