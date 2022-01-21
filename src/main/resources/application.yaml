@@ -24,3 +24,5 @@ spring:
           enabled: true
           settings:
             web-allow-others: false
+  aop:
+    proxy-target-class: true

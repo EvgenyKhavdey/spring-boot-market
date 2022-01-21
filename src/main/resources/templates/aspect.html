@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/common-head">
-    <title>Информация о товаре</title>
+    <title>Информация о времени срабатывания контроллеров</title>
 </head>
 <body>
 <nav th:replace="fragments/nav-bar::nav-bar">
@@ -9,13 +9,14 @@
 <div class="container">
     <div class="row justify-content-center g-0">
         <div class="col-6">
+            <h2 th:text="#{title.product.info}">Информация о времени срабатывания контроллеров</h2>
             <div class="card" style="max-width: 540px;">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 th:text="${'Id: ' + product.id}" class="card-title"></h5>
-                            <p th:text="${'Название товара: ' + product.title}" class="card-text"></p>
-                            <p th:text="${'Цена: ' + product.price}" class="card-text"><small class="text-muted"></small></p>
+                            <h5 th:text="${'ProductService: ' + time.getProduct() + ' ms'}" class="card-text"></h5>
+                            <p th:text="${'OrderService: ' + time.getOrder()  + ' ms'}" class="card-text"></p>
+                            <p th:text="${'CartServase: ' + time.getCart() + ' ms'}" class="card-text"></p>
                         </div>
                     </div>
                 </div>
