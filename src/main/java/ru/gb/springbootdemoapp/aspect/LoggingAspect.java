@@ -6,11 +6,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import ru.gb.springbootdemoapp.dto.ControllerTime;
 
 @Component
 @Aspect
 public class LoggingAspect {
+
+    public static long productTime;
+    public static long orderTime;
+    public static long cartTime;
 
     @Pointcut("execution(* ru.gb.springbootdemoapp.controller.ProductController.getAllStudents())")
     private void getProductController(){}
@@ -31,11 +34,11 @@ public class LoggingAspect {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
         long end = System.currentTimeMillis();
         if (methodSignature.getName().equals("getAllStudents")){
-            ControllerTime.productTime = end - begin;
+            productTime = end - begin;
         } else if (methodSignature.getName().equals("getOrderPage")){
-            ControllerTime.orderTime = end - begin;
+            orderTime = end - begin;
         } else if (methodSignature.getName().equals("getCart")){
-            ControllerTime.cartTime = end - begin;
+            cartTime = end - begin;
         }
         return obj;
     }

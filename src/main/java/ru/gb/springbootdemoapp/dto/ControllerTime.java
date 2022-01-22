@@ -1,20 +1,18 @@
 package ru.gb.springbootdemoapp.dto;
 
 import lombok.Data;
+import ru.gb.springbootdemoapp.aspect.LoggingAspect;
 
 @Data
 public class ControllerTime {
-    public static long productTime;
-    public static long orderTime;
-    public static long cartTime;
 
     long product;
     long order;
     long cart;
 
     public ControllerTime() {
-        this.product = productTime;
-        this.order = orderTime;
-        this.cart = cartTime;
+        this.product = LoggingAspect.productTime;
+        this.order = LoggingAspect.orderTime;
+        this.cart = LoggingAspect.cartTime;
     }
 }
