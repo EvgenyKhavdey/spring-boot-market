@@ -21,6 +21,12 @@ public class User {
   @Column(name = "password")
   private String password;
 
+  @Column(name = "email")
+  private String email;
+
+  @Column(name = "enabled")
+  private Boolean enabled;
+
   @ManyToMany
   @JoinTable(
       name = "users_authorities",
@@ -28,4 +34,7 @@ public class User {
       inverseJoinColumns = @JoinColumn(name = "authority_id")
   )
   private Set<Authority> authorities;
+
+  public User() {
+  }
 }

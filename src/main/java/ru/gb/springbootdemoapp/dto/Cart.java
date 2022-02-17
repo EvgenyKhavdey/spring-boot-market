@@ -12,9 +12,9 @@ public class Cart {
   private double price;
 
   public void addItem(CartItem cartItem) {
-    items.stream().filter(items -> items.getProductId().equals(cartItem.getProductId())).findFirst()
-        .ifPresentOrElse(CartItem::incrementCount, () -> items.add(cartItem));
-    recalculate();
+//    items.stream().filter(items -> items.getProductId().equals(cartItem.getProductId())).findFirst()
+//        .ifPresentOrElse(CartItem::incrementCount, () -> items.add(cartItem));
+//    recalculate();
   }
 
   public void removeItem(Long id) {
