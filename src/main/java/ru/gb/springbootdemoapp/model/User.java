@@ -15,17 +15,20 @@ public class User {
   @Column
   private Long id;
 
-  @Column(name = "login")
-  private String login;
+  @Column(name = "email")
+  private String email;
 
   @Column(name = "password")
   private String password;
 
+  @Column(name = "enabled")
+  private Boolean enabled;
+
   @ManyToMany
   @JoinTable(
-      name = "users_authorities",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "authority_id")
+          name = "users_authorities",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "authority_id")
   )
   private Set<Authority> authorities;
 }

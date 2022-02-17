@@ -2,8 +2,15 @@ CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
     login VARCHAR(255) NOT NULL UNIQUE ,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     enabled BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE TABLE IF NOT EXISTS registration_tokens (
+    id BIGSERIAL PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    expired_at TIMESTAMP NOT NULL,
+    ser_id BIGINT REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS authorities (

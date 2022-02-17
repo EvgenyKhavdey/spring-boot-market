@@ -2,6 +2,7 @@ package ru.gb.springbootdemoapp.service;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.gb.springbootdemoapp.dto.Cart;
 import ru.gb.springbootdemoapp.model.*;
 import ru.gb.springbootdemoapp.repository.OrderRepository;
@@ -30,13 +31,14 @@ public class OrderService {
         this.productRepository = productRepository;
     }
 
-    public Order placeOrder(String address, String email, Principal principal){
+    @Transactional
+    public Order placeOrder(String address, String email, Principal principal) {
         Cart cart = cartService.getCartForCurrnetUser();
-        if (cart.getItems().isEmpty()){
+        if (cart.getItems().isEmpty()) {
             throw new IllegalStateException("Корзина пуста");
         }
 
-        User user = principal != null ? userRepository.findByLogin(principal.getName()).orElse(null) : null;
+        User user = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
 
         Order order = new Order();
         order.setCustomer(user);

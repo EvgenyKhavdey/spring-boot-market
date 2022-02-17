@@ -17,15 +17,17 @@ import ru.gb.springbootdemoapp.service.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserService userService;
+  private final BCryptPasswordEncoder passwordEncoder;
 
-  public SecurityConfig(UserService userService) {
+  public SecurityConfig(UserService userService, BCryptPasswordEncoder passwordEncoder) {
     this.userService = userService;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    provider.setPasswordEncoder(new BCryptPasswordEncoder());
+    provider.setPasswordEncoder(passwordEncoder);
     provider.setUserDetailsService(userService);
     return provider;
   }
@@ -33,16 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-          .antMatchers("/admin/**").hasRole( "ADMIN")
-        .and()
-          .formLogin()
-          .loginPage("/login")
-        .and()
-          .logout()
-          .logoutSuccessUrl("/");
+            .antMatchers("/admin/**").hasRole( "ADMIN")
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .and()
+            .logout()
+            .logoutSuccessUrl("/");
 
     // для консольи h2 - так не делают в продакшене
     http.csrf().disable()
-        .headers().frameOptions().disable();
+            .headers().frameOptions().disable();
   }
 }
