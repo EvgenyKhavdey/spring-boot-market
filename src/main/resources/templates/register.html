@@ -7,8 +7,10 @@
 </nav>
 <div class="container">
     <div class="row justify-content-center">
+        <h2>Регистрация</h2>
+        <div th:if="${noPasswordException}" th:text="${noPasswordException.getMessage()}" class="alert alert-danger"></div>
+        <div th:if="${illegalStateException}" th:text="${illegalStateException.getMessage()}" class="alert alert-danger"></div>
         <form method="post" th:action="@{/register}" class="col-md-6">
-            <h2>Регистрация</h2>
             <div class="mb-3">
                 <label for="name" class="form-label">Email</label>
                 <input type="email" class="form-control" id="name" name="username">
@@ -16,6 +18,11 @@
             <div class="mb-3">
                 <label for="score" class="form-label">Пароль</label>
                 <input type="password" class="form-control" id="score" name="password">
+                <br>
+            </div>
+            <div class="mb-3">
+                <label for="score" class="form-label">Подтвердить</label>
+                <input type="password" class="form-control" id="score" name="repeat">
                 <br>
             </div>
             <a th:href="@{'/login'}" class="btn btn-secondary">Войти</a>

@@ -6,15 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.gb.springbootdemoapp.service.UserService;
+import ru.gb.springbootdemoapp.controller.exceptions.NoPasswordException;
+import ru.gb.springbootdemoapp.service.RegisterService;
 
 @Controller
 public class AuthController {
 
-  private final UserService userService;
+  private final RegisterService registerService;
 
-  public AuthController(UserService userService) {
-    this.userService = userService;
+  public AuthController(RegisterService registerService) {
+    this.registerService = registerService;
   }
 
   @GetMapping("/login")
@@ -28,21 +29,29 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public String register(@RequestParam String username, @RequestParam String password, Model model) {
-    // TODO принимать два пароля и сравнивать
-    // TODO валидация email regexp
-    String token = userService.sighUp(username, password); // TODO обработать ошибку и вывести пользователю
-    model.addAttribute("token", token);
-    return "register-confirm";
+  public String register(@RequestParam String username, @RequestParam String password, @RequestParam String repeat, Model model) {
+    try {
+      String token = registerService.sighUp(username, password, repeat);
+      model.addAttribute("token", token);
+      return "register-confirm";
+    }catch (NoPasswordException e){
+      model.addAttribute("noPasswordException", e);
+      return "register";
+    }catch (IllegalStateException e){
+      model.addAttribute("illegalStateException", e);
+      return "register";
+    }
   }
 
   @GetMapping("/register/confirm")
   public String registerConfirm(@RequestParam String token) {
     // TODO токен истек - что делать
-    if (userService.confirmRegistration(token)) {
+    int result = registerService.confirmRegistration(token);
+    if (result == 1) {
       return "register-complete";
+    } else if (result == 0){
+      return
     }
-    // TODO что-то выдавать разумное
-    return "redirect:/";
+      return "register-error";
   }
 }
