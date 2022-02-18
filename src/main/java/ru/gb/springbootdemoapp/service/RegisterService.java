@@ -64,7 +64,7 @@ public class RegisterService {
             return -1;
         }
         var registToken = registrationTokenRepository.findByToken(token);
-        if(LocalDateTime.now().isAfter(registToken.get().getExpiredAt())){
+        if(!registToken.isEmpty() && LocalDateTime.now().isAfter(registToken.get().getExpiredAt())){
             RegistrationToken registrationToken = registToken.get();
             registrationToken.setToken(UUID.randomUUID().toString());
             registrationTokenRepository.save(registrationToken);
