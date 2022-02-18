@@ -60,11 +60,11 @@ public class RegisterService {
     @Transactional
     public Integer confirmRegistration(String token) {
         var user = registrationTokenRepository.findUserByToken(token);
-        if (user.isEmpty()) {
+        var registToken = registrationTokenRepository.findByToken(token);
+        if (user.isEmpty() || registToken.isEmpty()) {
             return -1;
         }
-        var registToken = registrationTokenRepository.findByToken(token);
-        if(!registToken.isEmpty() && LocalDateTime.now().isAfter(registToken.get().getExpiredAt())){
+        if(LocalDateTime.now().isAfter(registToken.get().getExpiredAt())){
             RegistrationToken registrationToken = registToken.get();
             registrationToken.setToken(UUID.randomUUID().toString());
             registrationTokenRepository.save(registrationToken);
