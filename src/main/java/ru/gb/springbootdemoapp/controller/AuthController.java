@@ -50,7 +50,7 @@ public class AuthController {
     if (result == 1) {
       return "register-complete";
     } else if (result == 0){
-      return
+      return "register-repeat";
     }
       return "register-error";
   }
