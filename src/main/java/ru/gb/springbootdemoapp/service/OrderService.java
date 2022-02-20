@@ -84,8 +84,7 @@ public class OrderService {
 
     public List<Order> findAll(Principal principal){
         AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
-        List<Order> orders = orderRepository.findAll();
-        return orders;
+        return orderRepository.getOrderByCustomer(appUser);
     }
 }
 

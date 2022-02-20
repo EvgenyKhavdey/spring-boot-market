@@ -66,7 +66,7 @@ VALUES ('Ноутбук Lenovo', 44990, 1, '/media/lenovo.png'),
        ('Стиральная машинка LG', 32290, 2, '/media/lg.png'),
        ('Телевизор Samsung', 32290, 1, '/media/samsung.png');
 
--- INSERT INTO orders(customer_id, price, order_status, shipping_method, address, contact_email, creation_time, deliver_time, details)
--- VALUES (4, 44990, 1, 1, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2022-02-18 17:33:34', '2022-02-21 09:22:00', 'До двети'),
---        (4, 32290, 4, 2, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2021-12-01 12:01:52', '2021-12-19 12:00:00', 'До двети'),
---        (4, 32290, 3, 2, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2022-01-30 14:01:12', '2022-02-21 09:22:00', 'До двети');
+INSERT INTO orders(customer_id, price, order_status, shipping_method, address, contact_email, creation_time, deliver_time, details)
+VALUES (4, 44990, 0, 0, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2022-02-18 17:33:34', '2022-02-21 09:22:00', 'До двети'),
+       (4, 32290, 3, 1, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2021-12-01 12:01:52', '2021-12-19 12:00:00', 'До двети'),
+       (4, 32290, 2, 1, 'Москва, улицы Твекрсая 5', 'user@user.ru',  '2022-01-30 14:01:12', '2022-02-21 09:22:00', 'До двети');

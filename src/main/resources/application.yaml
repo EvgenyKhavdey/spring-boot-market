@@ -17,11 +17,11 @@ spring:
         dialec: org.hibernate.dialect.H2Dialect
         hibernate:
           ddl-auto: create
-      h2:
-        console:
-          enabled: true
-          settings:
-            web-allow-others: false
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
   mail:
     host: localhost
     port: 1025

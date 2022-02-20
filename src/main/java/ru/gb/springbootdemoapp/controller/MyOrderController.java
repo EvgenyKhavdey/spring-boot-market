@@ -23,7 +23,7 @@ public class MyOrderController {
     @GetMapping
     public String getAllOrders(Principal principal, Model model) {
         List<Order> orders = orderSerice.findAll(principal);
-//        model.addAttribute("products", students);
-        return "home";
+        model.addAttribute("orders", orders);
+        return "order-my";
     }
 }
