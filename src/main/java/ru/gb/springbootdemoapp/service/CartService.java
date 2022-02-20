@@ -26,7 +26,7 @@ public class CartService {
     cart = new Cart();
   }
 
-  public Cart getCartForCurrnetUser() {
+  public Cart getCartForCurrentUser() {
     return cart;
   }
 

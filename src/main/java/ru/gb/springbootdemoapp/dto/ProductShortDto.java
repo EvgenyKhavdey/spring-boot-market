@@ -20,4 +20,6 @@ public class ProductShortDto {
 
   @NotNull
   private String category;
+
+  private String imageUrl;
 }

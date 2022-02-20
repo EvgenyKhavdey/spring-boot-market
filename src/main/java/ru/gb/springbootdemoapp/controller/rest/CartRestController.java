@@ -17,7 +17,7 @@ public class CartRestController {
 
   @GetMapping// GET cart
   public Cart getCart() {
-    return cartService.getCartForCurrnetUser();
+    return cartService.getCartForCurrentUser();
   }
 
   @PostMapping("/product/{id}") // POST cart/product/1
