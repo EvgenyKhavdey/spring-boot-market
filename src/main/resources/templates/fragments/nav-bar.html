@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand" th:fragment="nav-bar">
+<nav class="navbar navbar-dark bg-dark navbar-expand" th:fragment="nav-bar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container">
         <a class="navbar-brand" href="#" th:href="@{'/'}">Магазин</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,6 +15,9 @@
                 </li>
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                     <a class="nav-link" th:href="@{'/admin'}">Администрирование</a>
+                </li>
+                <li sec:authorize="hasRole('USER')" class="nav-item">
+                    <a class="nav-link" th:href="@{'/myOrder'}">Мои заказы</a>
                 </li>
             </ul>
         </div>

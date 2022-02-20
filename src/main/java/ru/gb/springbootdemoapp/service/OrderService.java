@@ -81,5 +81,11 @@ public class OrderService {
 
         return order;
     }
+
+    public List<Order> findAll(Principal principal){
+        AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
+        List<Order> orders = orderRepository.findAll();
+        return orders;
+    }
 }
 
