@@ -31,7 +31,7 @@ public class ProductController {
     return "home";
   }
 
-  @GetMapping("/info/{id}")
+  @GetMapping("/product/info/{id}")
   public String getStudentInfo(@PathVariable Long id, Model model) {
     model.addAttribute("product", productMapper.productToProductDto(productService.findById(id).orElse(null)));
     return "product_info";

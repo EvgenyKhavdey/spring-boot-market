@@ -3,6 +3,7 @@ package ru.gb.springbootdemoapp.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gb.springbootdemoapp.controller.exceptions.NoPasswordException;
 import ru.gb.springbootdemoapp.model.AppUser;
 import ru.gb.springbootdemoapp.model.RegistrationToken;
 import ru.gb.springbootdemoapp.repository.AuthorityRepository;
@@ -39,7 +40,10 @@ public class RegistrationService {
   }
 
   @Transactional
-  public String sighUp(String email, String password) {
+  public String sighUp(String email, String password, String repeat) {
+    if (!password.equals(repeat)){
+      throw new NoPasswordException("Пароли не совпадают");
+    }
     boolean userExist = userRepository.findByEmail(email).isPresent();
     if (userExist) {
       throw new IllegalStateException("Пользователь уже существует");
@@ -60,12 +64,20 @@ public class RegistrationService {
   }
 
   @Transactional
-  public boolean confirmRegistration(String token) {
-    var user = registrationTokenRepository.findUserByToken(LocalDateTime.now(), token);
-    if (user.isEmpty()) {
-      return false;
+  public Integer confirmRegistration(String token) {
+    var user = registrationTokenRepository.findUserByToken(token);
+    var registToken = registrationTokenRepository.findByToken(token);
+    if (user.isEmpty() || registToken.isEmpty()) {
+      return -1;
+    }
+    if(LocalDateTime.now().isAfter(registToken.get().getExpiredAt())){
+      RegistrationToken registrationToken = registToken.get();
+      registrationToken.setToken(UUID.randomUUID().toString());
+      registrationTokenRepository.save(registrationToken);
+      emailService.sendMail(USER_REGISTRATION, Map.of("token", registrationToken.getToken()), List.of(user.get().getEmail()));
+      return 0;
     }
     user.ifPresent(u -> u.setEnabled(true));
-    return true;
+    return 1;
   }
 }
