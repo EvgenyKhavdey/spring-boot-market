@@ -23,6 +23,10 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private AppUser customer;
 
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private AppUser managerId;
+
     @Column(name = "contact_email")
     private String contactEmail;
 

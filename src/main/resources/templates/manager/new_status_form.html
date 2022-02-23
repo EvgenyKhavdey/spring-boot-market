@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/common-head">
+    <title>Форма добавления товара</title>
+</head>
+<body>
+<nav th:replace="fragments/nav-bar::nav-bar">
+</nav>
+<div class="container">
+    <h1 th:text="#{status.form}">Форма изменения статуса</h1>
+    <h2 th:text="'Менеджер ' +${#authentication.getName()}"></h2>
+</div>
+</body>
+</html>

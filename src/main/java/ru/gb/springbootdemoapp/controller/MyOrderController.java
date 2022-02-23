@@ -14,15 +14,15 @@ import java.util.List;
 @RequestMapping("/myOrder")
 public class MyOrderController {
 
-    private final OrderService orderSerice;
+    private final OrderService orderService;
 
-    public MyOrderController(OrderService orderSerice) {
-        this.orderSerice = orderSerice;
+    public MyOrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping
     public String getAllOrders(Principal principal, Model model) {
-        List<Order> orders = orderSerice.findAll(principal);
+        List<Order> orders = orderService.findAll(principal);
         model.addAttribute("orders", orders);
         return "order-my";
     }

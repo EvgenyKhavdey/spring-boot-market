@@ -22,6 +22,12 @@
                 <li sec:authorize="hasRole('USER')" class="nav-item">
                     <a class="nav-link" th:href="@{'/myOrder'}">Мои заказы</a>
                 </li>
+                <li sec:authorize="hasRole('MANAGER')" class="nav-item">
+                    <a class="nav-link" th:href="@{'/managerOrder'}">Новые заказы</a>
+                </li>
+                <li sec:authorize="hasRole('MANAGER')" class="nav-item">
+                    <a class="nav-link" th:href="@{'/managerOrder/info'}">Заказы в работе</a>
+                </li>
             </ul>
         </div>
 
