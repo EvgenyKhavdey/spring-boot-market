@@ -88,7 +88,7 @@ public class OrderService {
     }
 
     public List<Order> getOrderNew(){
-        return orderRepository.getOrder();
+        return orderRepository.getNewOrder();
     }
 
     public List<Order> getOrdersById(Principal principal){

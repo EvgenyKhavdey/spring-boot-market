@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS product_attributes (
 CREATE TABLE IF NOT EXISTS  orders(
     id                    BIGSERIAL PRIMARY KEY,
     customer_id           BIGINT REFERENCES users (id),
-    manager_id           BIGINT REFERENCES users (id),
+    manager           BIGINT REFERENCES users (id),
     price                 FLOAT NOT NULL,
     order_status          SMALLINT,
     shipping_method       SMALLINT,

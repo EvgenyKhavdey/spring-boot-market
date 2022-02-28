@@ -24,8 +24,8 @@ public class Order {
     private AppUser customer;
 
     @ManyToOne
-    @JoinColumn(name = "manager_id")
-    private AppUser managerId;
+    @JoinColumn(name = "manager")
+    private AppUser manager;
 
     @Column(name = "contact_email")
     private String contactEmail;
