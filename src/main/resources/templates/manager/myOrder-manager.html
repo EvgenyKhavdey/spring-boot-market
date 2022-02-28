@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/common-head">
+    <title>Админ панель</title>
+</head>
+<body>
+<nav th:replace="fragments/nav-bar::nav-bar">
+</nav>
+<div class="container">
+    <h2 th:text="'Список заказов ' +${#authentication.getName()}"></h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>id</td>
+            <td>Цена</td>
+            <td>Статус заказа</td>
+            <td>Дата формирования заказа</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">1</td>
+            <td th:text="${order.price}">0.00</td>
+            <td th:text="${order.orderStatus}">Техника</td>
+            <td th:text="${order.creationTime}">Техника</td>
+            <td><a th:href="@{${'/managerOrder/update/' + order.id}}">исменить статус</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

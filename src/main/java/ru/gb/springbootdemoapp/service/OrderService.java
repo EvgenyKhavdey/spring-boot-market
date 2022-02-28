@@ -86,5 +86,29 @@ public class OrderService {
         AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
         return orderRepository.getOrderByCustomer(appUser);
     }
+
+    public List<Order> getOrderNew(){
+        return orderRepository.getNewOrder();
+    }
+
+    public List<Order> getOrdersById(Principal principal){
+        AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
+        return orderRepository.getOrderByManagerId(appUser);
+    }
+
+    public void saveManagerOrders(Long id, Principal principal){
+        AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
+        Order order = orderRepository.getById(id);
+        order.setManagerId(appUser);
+        orderRepository.save(order);
+    }
+
+    public Order getById(Long id){
+        return orderRepository.getById(id);
+    }
+
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
 }
 
