@@ -93,13 +93,13 @@ public class OrderService {
 
     public List<Order> getOrdersById(Principal principal){
         AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
-        return orderRepository.getOrderByManagerId(appUser);
+        return orderRepository.getOrderByManager(appUser);
     }
 
     public void saveManagerOrders(Long id, Principal principal){
         AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
         Order order = orderRepository.getById(id);
-        order.setManagerId(appUser);
+        order.setManager(appUser);
         orderRepository.save(order);
     }
 

@@ -2,13 +2,11 @@ package ru.gb.springbootdemoapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.gb.springbootdemoapp.model.Order;
 import ru.gb.springbootdemoapp.service.OrderService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -42,13 +40,15 @@ public class ManagerOrderController {
 
     @GetMapping("/update/{id}")
     public String updateStatusOrders(@PathVariable Long id, Model model) {
-        model.addAttribute("orders", orderService.getById(id));
+        Order order = orderService.getById(id);
+        model.addAttribute("orders", order);
+        model.addAttribute("status", order.getOrderStatus());
         return "manager/new_status_form";
     }
 
     @PostMapping("/update")
-    public String updateStatusOrders(@PathVariable Order order, Model model) {
-        orderService.save(order);
+    public String updateStatusOrders(@RequestParam Long id, @Valid String status) {
+        int i = 0;
         return "manager/myOrder-manager";
     }
 }

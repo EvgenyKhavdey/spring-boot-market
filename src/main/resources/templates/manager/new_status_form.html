@@ -9,6 +9,19 @@
 <div class="container">
     <h1 th:text="#{status.form}">Форма изменения статуса</h1>
     <h2 th:text="'Менеджер ' +${#authentication.getName()}"></h2>
+    <br>
+
+    <form method="post" th:action="@{/managerOrder/update}">
+        <h4 th:text="${'Заказ номер ' + orders.getId()}"></h4>
+
+            <input type="number" name="id" th:value="${orders.getId()}">
+
+        <select  id="status" name="status">
+            <option th:each="status : ${status.values()}"
+                    th:value="${status}" th:text="${status}" ></option>
+        </select>
+        <button type="submit" class="cart-button" >Изменить статус</button>
+    </form>
 </div>
 </body>
 </html>
