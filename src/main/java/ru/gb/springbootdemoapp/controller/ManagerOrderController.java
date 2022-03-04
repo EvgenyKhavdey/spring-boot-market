@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springbootdemoapp.model.Order;
+import ru.gb.springbootdemoapp.model.OrderStatus;
 import ru.gb.springbootdemoapp.service.OrderService;
 
 import javax.validation.Valid;
@@ -47,8 +48,11 @@ public class ManagerOrderController {
     }
 
     @PostMapping("/update")
-    public String updateStatusOrders(@RequestParam Long id, @Valid String status) {
-        int i = 0;
+    public String updateStatusOrders(@RequestParam Long id, @Valid String status, Principal principal, Model model) {
+        Order order = orderService.getById(id);
+        order.setOrderStatus(OrderStatus.valueOf(status));
+        orderService.save(order);
+        model.addAttribute("orders", orderService.getOrdersById(principal));
         return "manager/myOrder-manager";
     }
 }
