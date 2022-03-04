@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/common-head">
+    <title>Форма добавления товара</title>
+</head>
+<body>
+<nav th:replace="fragments/nav-bar::nav-bar">
+</nav>
+<div class="container">
+    <h1 th:text="#{title.product.update}">Форма изменения товара</h1>
+        <form method="post" th:action="@{/admin/update}" class="col-md-6" th:object="${productShor}" enctype="multipart/form-data">
+            <br>
+            <input type="next" name="id" th:value="${product.getId()}" th:field="*{id}">
+            <br>
+            <div class="mb-3">
+                <label for="name" class="form-label">Название</label>
+                <input type="next" th:value="${product.getTitle()}" id="name"  th:field="*{title}">
+                <br>
+            </div>
+            <div class="mb-3">
+                <label for="categories" class="form-label">Категория</label>
+                <input th:value="${product.getCategory()}" list="categoriesOptions" id="categories"
+                       th:field="*{category}" required>
+                <datalist id="categoriesOptions">
+                    <option th:each="category : ${categories}" value="Категория" th:value="${category}">
+                        <br>
+                </datalist>
+            </div>
+            <div class="mb-3">
+                <label for="score" class="form-label">Цена</label>
+                <input type="next" th:value="${product.getPrice()}" id="score" th:field="*{price}">
+                <br>
+            </div>
+            <div class="mb-3">
+                <label for="score" class="form-label">Цена</label>
+                <input type="next" th:value="${product.getImageUrl()}" id="score" th:field="*{imageUrl}">
+                <br>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+</div>
+</body>
+</html>

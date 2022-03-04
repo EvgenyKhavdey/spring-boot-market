@@ -13,9 +13,7 @@
 
     <form method="post" th:action="@{/managerOrder/update}">
         <h4 th:text="${'Заказ номер ' + orders.getId()}"></h4>
-
-            <input type="number" name="id" th:value="${orders.getId()}">
-
+        <input type="number" name="id" th:value="${orders.getId()}">
         <select  id="status" name="status">
             <option th:each="status : ${status.values()}"
                     th:value="${status}" th:text="${status}" ></option>
