@@ -7,6 +7,7 @@ import ru.gb.springbootdemoapp.converter.ProductMapper;
 import ru.gb.springbootdemoapp.dto.Cart;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 
 @Service
 @SessionScope
@@ -23,7 +24,7 @@ public class CartService {
 
   @PostConstruct
   public void init() {
-    cart = new Cart();
+    cart = Cart.newBuilder().setItems(new ArrayList<>()).build();
   }
 
   public Cart getCartForCurrentUser() {
