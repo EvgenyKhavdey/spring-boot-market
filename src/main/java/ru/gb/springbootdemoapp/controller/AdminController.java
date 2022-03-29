@@ -10,6 +10,7 @@ import org.webjars.NotFoundException;
 import ru.gb.springbootdemoapp.converter.ProductMapper;
 import ru.gb.springbootdemoapp.dto.ProductDto;
 import ru.gb.springbootdemoapp.dto.ProductShortDto;
+import ru.gb.springbootdemoapp.model.Product;
 import ru.gb.springbootdemoapp.service.CategoryService;
 import ru.gb.springbootdemoapp.service.ProductService;
 import ru.gb.springbootdemoapp.service.StorageService;
@@ -74,5 +75,24 @@ public class AdminController {
   public String saveStudent(@PathVariable Long id) {
     productService.deleteById(id);
     return "redirect:/admin";
+  }
+
+  @PostMapping("/update/{id}")
+  public String updateStudent(@PathVariable Long id, Model model) {
+    model.addAttribute("product", productMapper.productToProductDto(productService.findById(id).orElse(null)));
+    model.addAttribute("productShor", new Product());
+    model.addAttribute("categories", categoryService.getAllTitles());
+    return "admin/updete_product_form";
+  }
+
+  @PostMapping("/update")
+  @Transactional
+  public String updateProduct(@Valid Product product,
+                            Model model) {
+    productService.save(product);
+    List<ProductDto> students =  productService.getAll().stream()
+            .map(productMapper::productToProductDto).collect(Collectors.toList());
+    model.addAttribute("products", students);
+    return "admin/index";
   }
 }

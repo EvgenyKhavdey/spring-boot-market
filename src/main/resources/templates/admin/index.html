@@ -18,6 +18,7 @@
             <td>Цена</td>
             <td></td>
             <td></td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
@@ -26,9 +27,12 @@
             <td th:text="${product.title}">Экран</td>
             <td th:text="${product.category}">Техника</td>
             <td th:text="${product.price}">999</td>
-            <td><a th:href="@{${'/info/' + product.id}}">Подробнее</a></td>
+            <td><a th:href="@{${'product/info/' + product.id}}">Подробнее</a></td>
             <td><form method="post" th:action="@{${'/admin/delete/' + product.id}}">
                 <button type="submit" class="btn btn-danger">x</button>
+            </form></td>
+            <td><form method="post" th:action="@{${'/admin/update/' + product.id}}">
+                <button type="submit" class="cart-button">Изменить</button>
             </form></td>
         </tr>
         </tbody>

@@ -13,8 +13,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> getOrderByCustomer(AppUser customer);
 
-    List<Order> getOrderByManagerId(AppUser manager);
+    List<Order> getOrderByManager(AppUser manager);
 
-    @Query("FROM Order o WHERE o.managerId = null")
+    @Query("FROM Order o WHERE o.manager = null")
     List<Order> getNewOrder();
 }
