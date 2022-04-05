@@ -11,17 +11,19 @@ import java.util.Optional;
 @Service
 public class ProductService {
   private final ProductRepository productRepository;
+  private final ProxyProductService proxyProductService;
 
-  public ProductService(ProductRepository productRepository) {
+  public ProductService(ProductRepository productRepository, ProxyProductService proxyProductService) {
     this.productRepository = productRepository;
+    this.proxyProductService = proxyProductService;
   }
 
   public List<Product> getAll() {
-    return productRepository.findAll();
+    return proxyProductService.getAll();
   }
 
   public void save(Product product) {
-    productRepository.save(product);
+    proxyProductService.save(product);
   }
 
   public Optional<Product> findById(Long id) {
@@ -29,6 +31,6 @@ public class ProductService {
   }
 
   public void deleteById(Long id) {
-    productRepository.deleteById(id);
+    proxyProductService.deleteById(id);
   }
 }
