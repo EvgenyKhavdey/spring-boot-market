@@ -53,6 +53,7 @@ public class OrderService {
         Order order = new Order();
         order.setCustomer(appUser);
         order.setPrice(cart.getPrice());
+        order.setPayment(Payment.NO_PAID);
         order.setOrderStatus(OrderStatus.NEW);
         order.setShippingMethod(ShippingMethod.DELIVERY);
         order.setAddress(address);
@@ -109,6 +110,10 @@ public class OrderService {
 
     public void save(Order order) {
         orderRepository.save(order);
+    }
+
+    public void pay(PaymentStrategy strategy, Order order){
+        strategy.pay(order);
     }
 }
 

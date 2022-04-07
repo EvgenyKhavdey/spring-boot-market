@@ -38,6 +38,10 @@ public class Order {
 
     @Enumerated
     @Column(columnDefinition = "smallint")
+    private Payment payment;
+
+    @Enumerated
+    @Column(columnDefinition = "smallint")
     private OrderStatus orderStatus;
 
     @Enumerated
