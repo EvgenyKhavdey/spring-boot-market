@@ -1,15 +1,16 @@
 package ru.gb.springbootdemoapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.gb.springbootdemoapp.model.Order;
 import ru.gb.springbootdemoapp.model.Payment;
 import ru.gb.springbootdemoapp.repository.OrderRepository;
 
 public final class CreditCarPaymentStrategy implements PaymentStrategy{
-    private final OrderRepository orderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
     private final String card;
 
-    public CreditCarPaymentStrategy(OrderRepository orderRepository, String card) {
-        this.orderRepository = orderRepository;
+    public CreditCarPaymentStrategy( String card) {
         this.card = card;
     }
 

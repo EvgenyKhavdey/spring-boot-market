@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.gb.springbootdemoapp.model.Order;
+import ru.gb.springbootdemoapp.service.CreditCarPaymentStrategy;
 import ru.gb.springbootdemoapp.service.OrderService;
+import ru.gb.springbootdemoapp.service.PayPalPaymentStrategy;
 
 import java.security.Principal;
 
@@ -40,5 +42,17 @@ public class OrderController {
             model.addAttribute("illegalStateException", e);
             return "order";
         }
+    }
+
+    @PostMapping
+    public String payPayPal(@RequestParam String email, @RequestParam String token, @RequestParam Order order){
+        orderSerice.pay(new PayPalPaymentStrategy(email, token), order);
+        return "order";
+    }
+
+    @PostMapping
+    public String payCreditCard(@RequestParam String card, @RequestParam Order order){
+        orderSerice.pay(new CreditCarPaymentStrategy(card), order);
+        return "order";
     }
 }
