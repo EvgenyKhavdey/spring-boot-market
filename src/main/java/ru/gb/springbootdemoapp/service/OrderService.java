@@ -3,6 +3,7 @@ package ru.gb.springbootdemoapp.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gb.springbootdemoapp.converter.OrderMapper;
 import ru.gb.springbootdemoapp.dto.Cart;
 import ru.gb.springbootdemoapp.model.*;
 import ru.gb.springbootdemoapp.repository.OrderRepository;
@@ -26,19 +27,22 @@ public class OrderService {
     private final UserService userService;
     private final ProductRepository productRepository;
     private final EmailService emailService;
+    private final OrderMapper orderMapper;
 
     public OrderService(OrderRepository orderRepository,
                         CartService cartService,
                         UserRepository userRepository,
                         UserService userService,
                         ProductRepository productRepository,
-                        EmailService emailService) {
+                        EmailService emailService, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
         this.userRepository = userRepository;
         this.userService = userService;
         this.productRepository = productRepository;
         this.emailService = emailService;
+
+        this.orderMapper = orderMapper;
     }
 
     @Transactional
@@ -87,13 +91,13 @@ public class OrderService {
         return orderRepository.getOrderByCustomer(appUser);
     }
 
-    public List<Order> getOrderNew(){
-        return orderRepository.getNewOrder();
+    public List<OrderView> getOrderNew(){
+        return orderRepository.getNewOrder().stream().map(orderMapper::mapDto).collect(Collectors.toList());
     }
 
-    public List<Order> getOrdersById(Principal principal){
+    public List<OrderView> getOrdersById(Principal principal){
         AppUser appUser = principal != null ? userRepository.findByEmail(principal.getName()).orElse(null) : null;
-        return orderRepository.getOrderByManager(appUser);
+        return orderRepository.getOrderByManager(appUser).stream().map(orderMapper::mapDto).collect(Collectors.toList());
     }
 
     public void saveManagerOrders(Long id, Principal principal){
